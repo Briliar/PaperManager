@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:grad_sys;DB_CLOSE_DELAY=-1;MODE=MySQL;INIT=RUNSCRIPT FROM 'classpath:db/init.sql'
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+knife4j:
+  enable: true
+  openapi:
+    title: 毕业设计管理系统API接口文档
+    description: 毕业设计管理系统API接口文档
+    version: 1.0
