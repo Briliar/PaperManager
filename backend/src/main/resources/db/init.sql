@@ -45,3 +45,18 @@ CREATE TABLE `sys_topic` (
 -- 插入一条测试数据
 INSERT INTO `sys_topic` (`title`, `summary`, `require_desc`, `teacher_id`, `source`, `type`, `max_students`, `status`)
 VALUES ('基于大语言模型的智能客服系统', '设计并实现一个支持上下文的智能客服', '熟练掌握Vue3和SpringBoot', 1, '自拟', '软件开发', 1, 1);
+
+CREATE TABLE `sys_student_topic` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `student_id` bigint NOT NULL COMMENT '学生ID(关联sys_user)',
+  `topic_id` bigint NOT NULL COMMENT '课题ID(关联sys_topic)',
+  `status` tinyint DEFAULT '0' COMMENT '申请状态(0:待审核, 1:已同意, 2:已拒绝)',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '申请时间',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_student_topic` (`student_id`, `topic_id`)
+);
+
+-- 插入一条测试数据: admin(其实是教师角色) 拥有 topic(id=1), 这里模拟一个学生账号去申请
+INSERT INTO `sys_user` (`username`, `password`, `real_name`, `role_id`, `status`) 
+VALUES ('student01', '123456', '张三同学', 3, 1);

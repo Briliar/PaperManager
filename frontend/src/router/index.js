@@ -21,7 +21,19 @@ const routes = [
         path: 'topic',
         name: 'Topic',
         component: () => import('../views/topic/index.vue'),
-        meta: { title: '选题管理', icon: 'Document' }
+        meta: { title: '课题申报与管理', icon: 'Document' }
+      },
+      {
+        path: 'select',
+        name: 'TopicSelect',
+        component: () => import('../views/topic/select.vue'),
+        meta: { title: '学生双选大厅', icon: 'List' }
+      },
+      {
+        path: 'applications',
+        name: 'Applications',
+        component: () => import('../views/topic/applications.vue'),
+        meta: { title: '学生选题审批', icon: 'User' }
       },
       {
         path: 'thesis',

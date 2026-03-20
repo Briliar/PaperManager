@@ -21,7 +21,15 @@
         </el-menu-item>
         <el-menu-item index="/topic">
           <el-icon><Document /></el-icon>
-          <template #title>选题管理</template>
+          <template #title>课题申报与管理</template>
+        </el-menu-item>
+        <el-menu-item index="/select">
+          <el-icon><List /></el-icon>
+          <template #title>学生双选大厅</template>
+        </el-menu-item>
+        <el-menu-item index="/applications">
+          <el-icon><User /></el-icon>
+          <template #title>学生选题审批</template>
         </el-menu-item>
         <el-menu-item index="/thesis">
           <el-icon><Files /></el-icon>
@@ -79,7 +87,7 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '../../store/user'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { House, Document, Files, Fold, Expand, CaretBottom } from '@element-plus/icons-vue'
+import { House, Document, Files, List, User, Fold, Expand, CaretBottom } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -120,104 +128,23 @@ const handleCommand = (command) => {
 </script>
 
 <style scoped>
-.app-wrapper {
-  height: 100vh;
-  width: 100%;
-}
-
-/* 侧边栏 */
-.sidebar-container {
-  transition: width 0.3s;
-  background-color: #304156;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.logo-container {
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
-  background-color: #2b3643;
-  color: #fff;
-  overflow: hidden;
-}
-.logo-title {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-.logo-title-mini {
-  font-size: 20px;
-  font-weight: bold;
-}
-.el-menu-vertical {
-  border-right: none;
-  flex: 1;
-}
-
-/* 顶部导航 */
-.navbar {
-  height: 60px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px 0 0;
-}
-.nav-left {
-  display: flex;
-  align-items: center;
-}
-.fold-btn {
-  padding: 0 20px;
-  font-size: 20px;
-  cursor: pointer;
-  color: #5a5e66;
-  transition: color 0.3s;
-}
-.fold-btn:hover {
-  color: #409EFF;
-}
-.breadcrumb {
-  margin-left: 10px;
-}
-.nav-right {
-  display: flex;
-  align-items: center;
-}
-.avatar-wrapper {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 0 10px;
-}
-.username {
-  margin: 0 8px;
-  font-size: 14px;
-  color: #606266;
-}
-
-/* 主体内容 */
-.app-main {
-  background-color: #f0f2f5;
-  padding: 20px;
-  position: relative;
-  overflow-y: auto;
-}
-
-/* 路由切换动画 */
-.fade-transform-leave-active,
-.fade-transform-enter-active {
-  transition: all 0.3s;
-}
-.fade-transform-enter-from {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-.fade-transform-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
+/* 样式与之前一致，省略重复展示以减少字符，实际文件中已包含完整样式 */
+.app-wrapper { height: 100vh; width: 100%; }
+.sidebar-container { transition: width 0.3s; background-color: #304156; overflow: hidden; display: flex; flex-direction: column; }
+.logo-container { height: 60px; line-height: 60px; text-align: center; background-color: #2b3643; color: #fff; overflow: hidden; }
+.logo-title { font-size: 18px; font-weight: 600; letter-spacing: 1px; }
+.logo-title-mini { font-size: 20px; font-weight: bold; }
+.el-menu-vertical { border-right: none; flex: 1; }
+.navbar { height: 60px; overflow: hidden; background: #fff; box-shadow: 0 1px 4px rgba(0,21,41,.08); display: flex; align-items: center; justify-content: space-between; padding: 0 20px 0 0; }
+.nav-left { display: flex; align-items: center; }
+.fold-btn { padding: 0 20px; font-size: 20px; cursor: pointer; color: #5a5e66; transition: color 0.3s; }
+.fold-btn:hover { color: #409EFF; }
+.breadcrumb { margin-left: 10px; }
+.nav-right { display: flex; align-items: center; }
+.avatar-wrapper { display: flex; align-items: center; cursor: pointer; padding: 0 10px; }
+.username { margin: 0 8px; font-size: 14px; color: #606266; }
+.app-main { background-color: #f0f2f5; padding: 20px; position: relative; overflow-y: auto; }
+.fade-transform-leave-active, .fade-transform-enter-active { transition: all 0.3s; }
+.fade-transform-enter-from { opacity: 0; transform: translateX(-30px); }
+.fade-transform-leave-to { opacity: 0; transform: translateX(30px); }
 </style>
