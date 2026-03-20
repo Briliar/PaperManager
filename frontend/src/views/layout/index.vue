@@ -17,10 +17,6 @@
       >
         <el-menu-item index="/dashboard">
           <el-icon><House /></el-icon>
-          <el-menu-item index="/weekly/student">
-            <el-icon><Calendar /></el-icon>
-            <template #title>我的周志</template>
-          </el-menu-item>
           <template #title>工作台首页</template>
         </el-menu-item>
         
@@ -28,31 +24,15 @@
         <template v-if="roleId === 1 || roleId === 2">
           <el-menu-item index="/topic">
             <el-icon><Document /></el-icon>
-          <el-menu-item index="/weekly/student">
-            <el-icon><Calendar /></el-icon>
-            <template #title>我的周志</template>
-          </el-menu-item>
             <template #title>课题申报与管理</template>
           </el-menu-item>
           <el-menu-item index="/applications">
             <el-icon><User /></el-icon>
-          <el-menu-item index="/weekly/student">
-            <el-icon><Calendar /></el-icon>
-            <template #title>我的周志</template>
-          </el-menu-item>
             <template #title>学生选题审批</template>
           </el-menu-item>
           <el-menu-item index="/proposal/teacher">
             <el-icon><Tickets /></el-icon>
-          <el-menu-item index="/weekly/student">
-            <el-icon><Calendar /></el-icon>
-            <template #title>我的周志</template>
-          </el-menu-item>
             <template #title>开题报告审核</template>
-          </el-menu-item>
-          <el-menu-item index="/weekly/student">
-            <el-icon><Calendar /></el-icon>
-            <template #title>我的周志</template>
           </el-menu-item>
         </template>
 
@@ -60,38 +40,22 @@
         <template v-if="roleId === 3">
           <el-menu-item index="/select">
             <el-icon><List /></el-icon>
-          <el-menu-item index="/weekly/student">
-            <el-icon><Calendar /></el-icon>
-          <el-menu-item index="/weekly/student">
-            <el-icon><Calendar /></el-icon>
-            <template #title>我的周志</template>
-          </el-menu-item>
-            <template #title>我的周志</template>
-          </el-menu-item>
             <template #title>学生双选大厅</template>
           </el-menu-item>
           <el-menu-item index="/proposal/student">
             <el-icon><EditPen /></el-icon>
-          <el-menu-item index="/weekly/student">
-            <el-icon><Calendar /></el-icon>
-            <template #title>我的周志</template>
-          </el-menu-item>
             <template #title>我的开题报告</template>
           </el-menu-item>
           <el-menu-item index="/weekly/student">
             <el-icon><Calendar /></el-icon>
             <template #title>我的周志</template>
           </el-menu-item>
+          <el-menu-item index="/thesis/student">
+            <el-icon><Files /></el-icon>
+            <template #title>论文与成果</template>
+          </el-menu-item>
         </template>
 
-        <el-menu-item index="/thesis/student">
-          <el-icon><Files /></el-icon>
-          <el-menu-item index="/weekly/student">
-            <el-icon><Calendar /></el-icon>
-            <template #title>我的周志</template>
-          </el-menu-item>
-          <template #title>论文与答辩</template>
-        </el-menu-item>
       </el-menu>
     </el-aside>
 
@@ -121,10 +85,6 @@
                 <el-dropdown-item command="profile">角色: {{ roleName }}</el-dropdown-item>
                 <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
-          <el-menu-item index="/weekly/student">
-            <el-icon><Calendar /></el-icon>
-            <template #title>我的周志</template>
-          </el-menu-item>
             </template>
           </el-dropdown>
         </div>
@@ -139,10 +99,6 @@
       </el-main>
     </el-container>
   </el-container>
-          <el-menu-item index="/weekly/student">
-            <el-icon><Calendar /></el-icon>
-            <template #title>我的周志</template>
-          </el-menu-item>
 </template>
 
 <script setup>
