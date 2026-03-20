@@ -36,6 +36,18 @@ const routes = [
         meta: { title: '学生选题审批', icon: 'User' }
       },
       {
+        path: 'proposal/student',
+        name: 'StudentProposal',
+        component: () => import('../views/proposal/student.vue'),
+        meta: { title: '我的开题报告', icon: 'EditPen' }
+      },
+      {
+        path: 'proposal/teacher',
+        name: 'TeacherProposal',
+        component: () => import('../views/proposal/teacher.vue'),
+        meta: { title: '开题报告审核', icon: 'Tickets' }
+      },
+      {
         path: 'thesis',
         name: 'Thesis',
         component: () => import('../views/dashboard/index.vue'),

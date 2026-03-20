@@ -19,18 +19,35 @@
           <el-icon><House /></el-icon>
           <template #title>工作台首页</template>
         </el-menu-item>
-        <el-menu-item index="/topic">
-          <el-icon><Document /></el-icon>
-          <template #title>课题申报与管理</template>
-        </el-menu-item>
-        <el-menu-item index="/select">
-          <el-icon><List /></el-icon>
-          <template #title>学生双选大厅</template>
-        </el-menu-item>
-        <el-menu-item index="/applications">
-          <el-icon><User /></el-icon>
-          <template #title>学生选题审批</template>
-        </el-menu-item>
+        
+        <!-- 教师/管理员 专属菜单 (roleId: 1 或 2) -->
+        <template v-if="roleId === 1 || roleId === 2">
+          <el-menu-item index="/topic">
+            <el-icon><Document /></el-icon>
+            <template #title>课题申报与管理</template>
+          </el-menu-item>
+          <el-menu-item index="/applications">
+            <el-icon><User /></el-icon>
+            <template #title>学生选题审批</template>
+          </el-menu-item>
+          <el-menu-item index="/proposal/teacher">
+            <el-icon><Tickets /></el-icon>
+            <template #title>开题报告审核</template>
+          </el-menu-item>
+        </template>
+
+        <!-- 学生 专属菜单 (roleId: 3) -->
+        <template v-if="roleId === 3">
+          <el-menu-item index="/select">
+            <el-icon><List /></el-icon>
+            <template #title>学生双选大厅</template>
+          </el-menu-item>
+          <el-menu-item index="/proposal/student">
+            <el-icon><EditPen /></el-icon>
+            <template #title>我的开题报告</template>
+          </el-menu-item>
+        </template>
+
         <el-menu-item index="/thesis">
           <el-icon><Files /></el-icon>
           <template #title>论文与答辩</template>
@@ -40,7 +57,6 @@
 
     <!-- 主体区域 -->
     <el-container class="main-container">
-      <!-- 顶部导航 -->
       <el-header class="navbar">
         <div class="nav-left">
           <el-icon class="fold-btn" @click="toggleCollapse">
@@ -57,12 +73,12 @@
           <el-dropdown trigger="click" @command="handleCommand">
             <div class="avatar-wrapper">
               <el-avatar :size="32" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
-              <span class="username">{{ userStore.userInfo?.realName || 'Admin' }}</span>
+              <span class="username">{{ userStore.userInfo?.realName || userStore.userInfo?.username || '用户' }}</span>
               <el-icon><CaretBottom /></el-icon>
             </div>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item command="profile">个人中心</el-dropdown-item>
+                <el-dropdown-item command="profile">角色: {{ roleName }}</el-dropdown-item>
                 <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </template>
@@ -70,7 +86,6 @@
         </div>
       </el-header>
 
-      <!-- 路由出口 (核心内容区) -->
       <el-main class="app-main">
         <router-view v-slot="{ Component }">
           <transition name="fade-transform" mode="out-in">
@@ -87,7 +102,7 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '../../store/user'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { House, Document, Files, List, User, Fold, Expand, CaretBottom } from '@element-plus/icons-vue'
+import { House, Document, Files, List, User, Fold, Expand, CaretBottom, Tickets, EditPen } from '@element-plus/icons-vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -95,12 +110,19 @@ const userStore = useUserStore()
 
 const isCollapse = ref(false)
 
-// 当前激活的菜单
+const roleId = computed(() => userStore.userInfo?.roleId || 1)
+
+const roleName = computed(() => {
+  if (roleId.value === 1) return '管理员'
+  if (roleId.value === 2) return '指导老师'
+  if (roleId.value === 3) return '学生'
+  return '未知角色'
+})
+
 const activeMenu = computed(() => {
   return route.path
 })
 
-// 当前路由的Title（用于面包屑）
 const currentRouteTitle = computed(() => {
   return route.meta.title || '工作台'
 })
@@ -121,14 +143,11 @@ const handleCommand = (command) => {
       ElMessage.success('已退出登录')
       router.push('/login')
     }).catch(() => {})
-  } else if (command === 'profile') {
-    ElMessage.info('个人中心模块待开发')
   }
 }
 </script>
 
 <style scoped>
-/* 样式与之前一致，省略重复展示以减少字符，实际文件中已包含完整样式 */
 .app-wrapper { height: 100vh; width: 100%; }
 .sidebar-container { transition: width 0.3s; background-color: #304156; overflow: hidden; display: flex; flex-direction: column; }
 .logo-container { height: 60px; line-height: 60px; text-align: center; background-color: #2b3643; color: #fff; overflow: hidden; }

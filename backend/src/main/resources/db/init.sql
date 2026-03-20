@@ -60,3 +60,16 @@ CREATE TABLE `sys_student_topic` (
 -- 插入一条测试数据: admin(其实是教师角色) 拥有 topic(id=1), 这里模拟一个学生账号去申请
 INSERT INTO `sys_user` (`username`, `password`, `real_name`, `role_id`, `status`) 
 VALUES ('student01', '123456', '张三同学', 3, 1);
+
+CREATE TABLE `sys_proposal` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '开题报告ID',
+  `student_id` bigint NOT NULL COMMENT '学生ID',
+  `topic_id` bigint NOT NULL COMMENT '课题ID',
+  `content` text COMMENT '开题报告正文',
+  `status` tinyint DEFAULT '0' COMMENT '审核状态(0:待审核, 1:已通过, 2:已驳回)',
+  `teacher_comment` varchar(500) DEFAULT NULL COMMENT '指导老师意见',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '提交时间',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_student_topic_proposal` (`student_id`, `topic_id`)
+);
