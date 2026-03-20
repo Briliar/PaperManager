@@ -73,3 +73,31 @@ CREATE TABLE `sys_proposal` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_student_topic_proposal` (`student_id`, `topic_id`)
 );
+
+CREATE TABLE `sys_weekly_report` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `student_id` bigint NOT NULL,
+  `topic_id` bigint NOT NULL,
+  `week_num` int NOT NULL COMMENT '周次',
+  `content` text COMMENT '周志内容',
+  `status` tinyint DEFAULT '0' COMMENT '0:待审核, 1:已审阅, 2:需修改',
+  `teacher_comment` varchar(500),
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `sys_thesis` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `student_id` bigint NOT NULL,
+  `topic_id` bigint NOT NULL,
+  `file_name` varchar(200) COMMENT '文件名',
+  `file_url` varchar(500) COMMENT '文件路径/网盘链接',
+  `type` tinyint COMMENT '0:初稿, 1:定稿',
+  `status` tinyint DEFAULT '0' COMMENT '0:待审核, 1:通过, 2:打回',
+  `score` decimal(5,2) COMMENT '成绩',
+  `teacher_comment` text,
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);

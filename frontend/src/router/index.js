@@ -48,10 +48,16 @@ const routes = [
         meta: { title: '开题报告审核', icon: 'Tickets' }
       },
       {
-        path: 'thesis',
-        name: 'Thesis',
-        component: () => import('../views/dashboard/index.vue'),
-        meta: { title: '论文与答辩', icon: 'Files' }
+        path: 'weekly/student',
+        name: 'WeeklyStudent',
+        component: () => import('../views/weekly/student.vue'),
+        meta: { title: '我的周志', icon: 'Calendar' }
+      },
+      {
+        path: 'thesis/student',
+        name: 'ThesisStudent',
+        component: () => import('../views/thesis/student.vue'),
+        meta: { title: '论文与成果', icon: 'Files' }
       }
     ]
   }
