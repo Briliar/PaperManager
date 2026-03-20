@@ -90,7 +90,7 @@ const handleLogin = async () => {
       roleId: res.roleId
     })
     ElMessage.success('登录成功，欢迎回来！')
-    router.push('/layout')
+    router.push('/')
   } catch (error) {
     console.error('登录失败', error)
   } finally {
